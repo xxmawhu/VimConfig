@@ -2,9 +2,18 @@
 echo "It will take some mimutes, please wait util the install completed ^_^"
 
 #back up
-mv -f ~/vim ~/vim_old
-mv -f ~/.vim ~/.vim_old
-mv -f ~/.vimrc ~/.vimrc_old
+if [ -d vim ]; then
+    mv -f ~/vim ~/vim_old
+    echo "back up ~/vim"
+fi
+if [ -f .vimrc ]; then
+    mv -f ~/.vimrc ~/.vimrc_old
+    echo "back up ~/.vimrc"
+fi
+if [ -d .vim ]; then
+    mv -f ~/.vim ~/.vim_old
+    echo "back up ~/.vim"
+fi
 
 cp -f vimrc ~/.vimrc
 
