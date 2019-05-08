@@ -23,6 +23,7 @@ set fileencodings=utf-8,gb2312,gbk,gb18030
 set termencoding=utf-8
 set encoding=utf-8
 set matchtime=2
+set hlsearch
 hi Search term=standout ctermfg=0 ctermbg=3
 if has("autocmd")
     autocmd FileType python setlocal ts=4 sw=4 expandtab
