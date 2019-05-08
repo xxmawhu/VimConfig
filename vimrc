@@ -26,6 +26,7 @@ set matchtime=2
 hi Search term=standout ctermfg=0 ctermbg=3
 if has("autocmd")
     autocmd FileType python setlocal ts=4 sw=4 expandtab
+    "let the cursor jump to the positon opend last time
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
