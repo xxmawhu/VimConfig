@@ -13,6 +13,6 @@ Plugin 'davidhalter/jedi-vim'
 let g:jedi#completions_command = "<C-P>"
 ```
 ####  功能
-* 查找定义 \+g
-* 重命名 \+r
-
+* `\+g` 查找定义 
+* `\+r` 重命名 
+* `\+d` 查找定义的位置 
