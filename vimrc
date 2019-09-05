@@ -23,12 +23,17 @@ set fileencodings=utf-8,gb2312,gbk,gb18030
 set termencoding=utf-8
 set encoding=utf-8
 set matchtime=2
+hi Search term=standout ctermfg=0 ctermbg=3
+set matchtime=2
 set hlsearch
 hi Search term=standout ctermfg=0 ctermbg=3
 if has("autocmd")
     autocmd FileType python setlocal ts=4 sw=4 expandtab
-    "let the cursor jump to the positon opend last time
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+if has("autocmd")
+    autocmd FileType python setlocal ts=4 sw=4 expandtab
 endif
 
 set smartindent
@@ -40,16 +45,22 @@ inoremap ( ()<ESC>i
 inoremap [ []<ESC>i
 inoremap { {}<ESC>i
 set textwidth=80
+" 拼写检查
 autocmd BufNewFile,BufRead *.tex set spell
+" autocmd BufNewFile,BufRead *.cxx set spell
 
 set fileformats=unix
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
-Bundle 'SirVer/ultisnips'
-Bundle 'honza/vim-snippets'
-Bundle  "godlygeek/tabular"
-Bundle "nathanaelkane/vim-indent-guides"
+"set rtp+=~/.vim/bundle/vundle/
+"call vundle#rc()
+"Bundle 'gmarik/vundle'
+"Bundle 'SirVer/ultisnips'
+"Bundle 'honza/vim-snippets'
+"Bundle  "godlygeek/tabular"
+"Bundle "nathanaelkane/vim-indent-guides"
+"Bundle 'zxqfl/tabnine-vim'
+
+" 显示对齐线
+"Bundle 'Yggdroot/indentLine'
 let g:UltiSnipsExpandTrigger="<C-z>"
 let g:UltiSnipsListSnippets="<C-i>"
 "let g:indent_guides_enable_on_vim_startup = 0
@@ -74,3 +85,100 @@ else
 execute "set cc-=".col_num
 endif
 endfunction
+
+" clang-format
+map <C-K> :pyf ~/.vim/clang-format.py<cr>
+imap <C-K> <c-o>:pyf ~/.vim/clang-format.py<cr>
+""""""""""""""""""""""""""""""""""""""""""
+"Add path
+""""""""""""""""""""""""""""""""""""""""""""
+set path+=/besfs/users/lihb/software/SL6/root-6.18.00/include
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vundle的设置
+" https://github.com/VundleVim/Vundle.vim
+""""""""""""""""""""""""""i""""""""""""""""""""""""""""""
+set nocompatible              " be iMproved, required
+filetype off                  " required
+""
+" ycm
+""
+"let g:ycm_clangd_binary_path = '/besfs/users/lihb/software/SL6/llvm/stage1/install/bin'
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+
+"a good auto complete plug for python
+Plugin 'davidhalter/jedi-vim'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'https://github.com/nine2/vim-copyright.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+Plugin 'gmarik/vundle'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+filetype plugin on
+
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+"
+" configure for copyright
+let g:file_copyright_name = "Xin-Xin MA"
+let g:file_copyright_email = "xxmawhu@163.com"
+let g:file_copyright_auto_filetypes = ['sh', 'plx', 'pl', 'pm', 'py', 'python', 'h', 'hpp', 'c', 'cpp', 'java', 'cxx', 'cc', 'hh']
+
+let g:file_copyright_comment_prefix_map  = {
+    \"python": "\#", "py":"\#",
+    \"cpp":"/*", "c":"/*", "h":"/*", "hpp":"/*",
+    \"go":"/*",
+    \"vim":"\"",
+    \"tex":"\%",
+    \"sh":"\#", "shell":"\#",
+\}
+
+let g:file_copyright_comment_mid_prefix_map = {
+    \"python": "\#", "py":"\#",
+    \"cpp":"\#", "c":"\#", "h":"\#", "hpp":"\#",
+    \"go":"\#",
+    \"vim":"\"",
+    \"tex":"\%",
+    \"sh":"\#", "shell":"\#",
+\}
+
+let g:file_copyright_comment_end_map = {
+    \"cpp":"*/", "c":"*/", "h":"*/", "hpp":"*/",
+    \"go":"*/",
+\}
+
+" use ctrl+p to trigger an auto-completion    
+let g:jedi#completions_command = "<C-P>"

@@ -22,4 +22,8 @@ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 echo "installing bundle now......" > install_log
 vim install_log -c "BundleInstall" -c "q" -c "q"
 
+echo "install pydiction"
+cd ~/.vim/bundle
+git clone https://github.com/rkulla/pydiction.git
+
 echo "All done"
