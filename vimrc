@@ -100,6 +100,7 @@ set path+=/besfs/users/lihb/software/SL6/root-6.18.00/include
 """"""""""""""""""""""""""i""""""""""""""""""""""""""""""
 set nocompatible              " be iMproved, required
 filetype off                  " required
+set shell=/bin/bash
 ""
 " ycm
 ""

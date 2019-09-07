@@ -1,4 +1,15 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# ====================================================
+#   Copyright (C)2019 All rights reserved.
+#
+#   Author        : Xin-Xin MA
+#   Email         : xxmawhu@163.com
+#   File Name     : setup.sh
+#   Created Time  : 2019-09-07 21:27
+#   Last Modified : 2019-09-07 21:29
+#   Describe      :
+#
+# ====================================================
 echo "It will take some mimutes, please wait util the install completed ^_^"
 
 #back up
@@ -18,12 +29,8 @@ fi
 cp -f vimrc ~/.vimrc
 
 #install vundle
-git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-echo "installing bundle now......" > install_log
-vim install_log -c "BundleInstall" -c "q" -c "q"
+echo "installing bundle now......"
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+echo "install bundle successful!"
 
-echo "install pydiction"
-cd ~/.vim/bundle
-git clone https://github.com/rkulla/pydiction.git
-
-echo "All done"
+vim +PluginInstall +qall
