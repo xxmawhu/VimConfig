@@ -40,14 +40,17 @@ set smartindent
 set completeopt=preview,menu
 set autowrite
 set foldmethod=indent 
+set textwidth=80
+" 不自动折行
+set nowrap
 
 inoremap ( ()<ESC>i
 inoremap [ []<ESC>i
 inoremap { {}<ESC>i
-set textwidth=80
-" 拼写检查
+
+" 新建和读写一个tex文件时，执行拼写检查
 autocmd BufNewFile,BufRead *.tex set spell
-" autocmd BufNewFile,BufRead *.cxx set spell
+"autocmd BufNewFile,BufRead *.cxx set spell
 
 set fileformats=unix
 "set rtp+=~/.vim/bundle/vundle/
