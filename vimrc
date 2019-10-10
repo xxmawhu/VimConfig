@@ -139,6 +139,8 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'gmarik/vundle'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+" 自动补全
+Plugin 'Valloric/YouCompleteMe'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
