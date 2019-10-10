@@ -1,10 +1,16 @@
 function! MySys()
+    "return srting: 'linux', or 'windows'
+    "determine the operate system 
     if has("win16") || has("win32") || has("win64") || has("win95")
         return "windows"
     elseif has("unix")
         return "linux"
     endif
 endfunction
+
+""""""""""""""""""""""""""
+" 通用设置
+""""""""""""""""""""""""""
 syntax on
 filetype indent on
 filetype plugin on 
@@ -23,6 +29,14 @@ set fileencodings=utf-8,gb2312,gbk,gb18030
 set termencoding=utf-8
 set encoding=utf-8
 set matchtime=2
+set smartindent
+set completeopt=preview,menu
+set autowrite
+set foldmethod=indent 
+" 每行长度为80字符
+set textwidth=80
+" 不自动折行
+set nowrap
 hi Search term=standout ctermfg=0 ctermbg=3
 set matchtime=2
 set hlsearch
@@ -36,13 +50,7 @@ if has("autocmd")
     autocmd FileType python setlocal ts=4 sw=4 expandtab
 endif
 
-set smartindent
-set completeopt=preview,menu
-set autowrite
-set foldmethod=indent 
-set textwidth=80
-" 不自动折行
-set nowrap
+
 
 inoremap ( ()<ESC>i
 inoremap [ []<ESC>i
