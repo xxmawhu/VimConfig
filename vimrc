@@ -196,3 +196,4 @@ let g:file_copyright_comment_end_map = {
 
 " use ctrl+p to trigger an auto-completion    
 let g:jedi#completions_command = "<C-P>"
+autocmd CompleteDone * pclose
