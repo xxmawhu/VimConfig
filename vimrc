@@ -150,6 +150,8 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'gmarik/vundle'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+" indent guide line
+Plugin 'nathanaelkane/vim-indent-guides'
 " 自动补全
 Plugin 'Valloric/YouCompleteMe'
 
