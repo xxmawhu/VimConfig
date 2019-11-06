@@ -137,7 +137,7 @@ Plugin 'davidhalter/jedi-vim'
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'https://github.com/nine2/vim-copyright.git'
+Plugin 'https://github.com/xxmawhu/vim-copyright.git'
 " git repos on your local machine (i.e. when working on your own plugin)
 "Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
