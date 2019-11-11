@@ -66,8 +66,15 @@ set fileformats=unix
 "Bundle 'gmarik/vundle'
 "Bundle 'SirVer/ultisnips'
 "Bundle 'honza/vim-snippets'
-"Bundle  "godlygeek/tabular"
-"Bundle "nathanaelkane/vim-indent-guides"
+
+" 按照一定的符合对语句块进行对齐
+" aligning the selected block text with symbol `xx`,
+" such as :Tabular\=
+" such as :Tabular\&
+" such as :Tabular\,
+Bundle  'godlygeek/tabular'
+
+"Bundle 'nathanaelkane/vim-indent-guides'
 "Bundle 'zxqfl/tabnine-vim'
 
 " 显示对齐线
