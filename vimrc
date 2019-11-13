@@ -35,8 +35,8 @@ set autowrite
 set foldmethod=indent 
 " 每行长度为80字符
 set textwidth=80
-" 不自动折行
-set nowrap
+" 自动折行
+set wrap
 hi Search term=standout ctermfg=0 ctermbg=3
 set matchtime=2
 set hlsearch
