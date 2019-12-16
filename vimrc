@@ -41,44 +41,34 @@ hi Search term=standout ctermfg=0 ctermbg=3
 set matchtime=2
 set hlsearch
 hi Search term=standout ctermfg=0 ctermbg=3
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 针对py脚本，设置tab键。早期的python要求必须要4个空格对齐，虽然新的
+" 版本可以用两个空格，但是强烈建议不要用4个空格对齐
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("autocmd")
     autocmd FileType python setlocal ts=4 sw=4 expandtab
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"每次重新打开文件，光标停留在原来的位置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has("autocmd")
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
-
-if has("autocmd")
-    autocmd FileType python setlocal ts=4 sw=4 expandtab
-endif
-
-
 
 inoremap ( ()<ESC>i
 inoremap [ []<ESC>i
 inoremap { {}<ESC>i
 
-" 新建和读写一个tex文件时，执行拼写检查
+"执行拼写检查，针对tex文件，一般的文件不需要检查单词的拼写问题
 autocmd BufNewFile,BufRead *.tex set spell
-"autocmd BufNewFile,BufRead *.cxx set spell
+autocmd BufNewFile,BufRead *.txt set spell
+autocmd BufNewFile,BufRead *.md set spell
 
+set nocompatible              " be iMproved, required
+" filetype off                  " required
+set shell=/bin/bash
 set fileformats=unix
-"set rtp+=~/.vim/bundle/vundle/
-"call vundle#rc()
-"Bundle 'gmarik/vundle'
-"Bundle 'SirVer/ultisnips'
-"Bundle 'honza/vim-snippets'
-
-" 按照一定的符合对语句块进行对齐
-" aligning the selected block text with symbol `xx`,
-" such as :Tabular\=
-" such as :Tabular\&
-" such as :Tabular\,
-Bundle  'godlygeek/tabular'
-
-"Bundle 'nathanaelkane/vim-indent-guides'
-"Bundle 'zxqfl/tabnine-vim'
-
-" 显示对齐线
-"Bundle 'Yggdroot/indentLine'
 let g:UltiSnipsExpandTrigger="<C-z>"
 let g:UltiSnipsListSnippets="<C-i>"
 "let g:indent_guides_enable_on_vim_startup = 0
@@ -86,6 +76,10 @@ let g:UltiSnipsListSnippets="<C-i>"
 let g:indent_guides_guide_size = 1
 let g:indent_guides_tab_guides = 2 
 let g:indent_guides_auto_colors = 0
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 配色方案
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
 hi IndentGuidesOdd  ctermbg=black
@@ -93,32 +87,26 @@ hi IndentGuidesEven ctermbg=darkgrey
 "set cursorcolumn
 "hi CursorColumn ctermbg=blue ctermfg=red
 " 
-map <leader>cl :call SetColorColumn()<CR>
 function! SetColorColumn()
-let col_num = virtcol(".")
-let cc_list = split(&cc, ',')
-if count(cc_list, string(col_num)) <= 0
-execute "set cc+=".col_num
-else
-execute "set cc-=".col_num
-endif
+    let col_num = virtcol(".")
+    let cc_list = split(&cc, ',')
+    if count(cc_list, string(col_num)) <= 0
+        execute "set cc+=".col_num
+    else
+        execute "set cc-=".col_num
+    endif
 endfunction
+map <leader>cl :call SetColorColumn()<CR>
 
-" clang-format
-map <C-K> :pyf ~/.vim/clang-format.py<cr>
-imap <C-K> <c-o>:pyf ~/.vim/clang-format.py<cr>
 """"""""""""""""""""""""""""""""""""""""""
 "Add path
 """"""""""""""""""""""""""""""""""""""""""""
-set path+=/besfs/users/lihb/software/SL6/root-6.18.00/include
+"set path+=/besfs/users/lihb/software/SL6/root-6.18.00/include
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle的设置
 " https://github.com/VundleVim/Vundle.vim
 """"""""""""""""""""""""""i""""""""""""""""""""""""""""""
-set nocompatible              " be iMproved, required
-filetype off                  " required
-set shell=/bin/bash
 ""
 " ycm
 ""
@@ -158,10 +146,21 @@ Plugin 'gmarik/vundle'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 " indent guide line
+Plugin 'xxmawhu/indentLine'
 Plugin 'nathanaelkane/vim-indent-guides'
 " 自动补全
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 
+" 注释工具， 选中行，依次按 `\`, `c` , `c`
+Plugin 'scrooloose/nerdcommenter'
+
+" 对齐
+" 按照一定的符号对语句块进行对齐
+" aligning the selected block text with symbol `xx`,
+" such as :Tabular\=
+" such as :Tabular\&
+" such as :Tabular\,
+Plugin  'godlygeek/tabular'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -181,28 +180,28 @@ let g:file_copyright_email = "xxmawhu@163.com"
 let g:file_copyright_auto_filetypes = ['sh', 'plx', 'pl', 'pm', 'py', 'python', 'h', 'hpp', 'c', 'cpp', 'java', 'cxx', 'cc', 'hh']
 
 let g:file_copyright_comment_prefix_map  = {
-    \"python": "\#", "py":"\#",
-    \"cpp":"/*", "c":"/*", "h":"/*", "hpp":"/*",
-    \"go":"/*",
-    \"vim":"\"",
-    \"tex":"\%",
-    \"sh":"\#", "shell":"\#",
-\}
+            \"python": "\#", "py":"\#",
+            \"cpp":"/*", "c":"/*", "h":"/*", "hpp":"/*",
+            \"go":"/*",
+            \"vim":"\"",
+            \"tex":"\%",
+            \"sh":"\#", "shell":"\#",
+            \}
 
 let g:file_copyright_comment_mid_prefix_map = {
-    \"python": "\#", "py":"\#",
-    \"cpp":"\#", "c":"\#", "h":"\#", "hpp":"\#",
-    \"go":"\#",
-    \"vim":"\"",
-    \"tex":"\%",
-    \"sh":"\#", "shell":"\#",
-\}
+            \"python": "\#", "py":"\#",
+            \"cpp":"\#", "c":"\#", "h":"\#", "hpp":"\#",
+            \"go":"\#",
+            \"vim":"\"",
+            \"tex":"\%",
+            \"sh":"\#", "shell":"\#",
+            \}
 
 let g:file_copyright_comment_end_map = {
-    \"cpp":"*/", "c":"*/", "h":"*/", "hpp":"*/",
-    \"go":"*/",
-\}
+            \"cpp":"*/", "c":"*/", "h":"*/", "hpp":"*/",
+            \"go":"*/",
+            \}
 
 " use ctrl+p to trigger an auto-completion    
-let g:jedi#completions_command = "<C-P>"
+let g:jedi#completions_command = "<C-p>"
 autocmd CompleteDone * pclose
