@@ -1,6 +1,6 @@
 function! MySys()
     "return srting: 'linux', or 'windows'
-    "determine the operate system 
+    "determine the operate system
     if has("win16") || has("win32") || has("win64") || has("win95")
         return "windows"
     elseif has("unix")
@@ -13,7 +13,7 @@ endfunction
 """"""""""""""""""""""""""
 syntax on
 filetype indent on
-filetype plugin on 
+filetype plugin on
 filetype plugin indent on
 set number
 set magic
@@ -32,7 +32,7 @@ set matchtime=2
 set smartindent
 set completeopt=preview,menu
 set autowrite
-set foldmethod=indent 
+set foldmethod=indent
 " 每行长度为80字符
 set textwidth=80
 " 自动折行
@@ -74,7 +74,7 @@ let g:UltiSnipsListSnippets="<C-i>"
 "let g:indent_guides_enable_on_vim_startup = 0
 "let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
-let g:indent_guides_tab_guides = 2 
+let g:indent_guides_tab_guides = 2
 let g:indent_guides_auto_colors = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -86,7 +86,7 @@ hi IndentGuidesOdd  ctermbg=black
 hi IndentGuidesEven ctermbg=darkgrey
 "set cursorcolumn
 "hi CursorColumn ctermbg=blue ctermfg=red
-" 
+"
 function! SetColorColumn()
     let col_num = virtcol(".")
     let cc_list = split(&cc, ',')
@@ -149,7 +149,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'xxmawhu/indentLine'
 Plugin 'nathanaelkane/vim-indent-guides'
 " 自动补全
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'zxqfl/tabnine-vim'
 
 " 注释工具， 选中行，依次按 `\`, `c` , `c`
 Plugin 'scrooloose/nerdcommenter'
@@ -206,7 +206,7 @@ let g:file_copyright_comment_end_map = {
             \"go":"*/",
             \}
 
-" use ctrl+p to trigger an auto-completion    
+" use ctrl+p to trigger an auto-completion
 let g:jedi#completions_command = "<C-p>"
 autocmd CompleteDone * pclose
 map gs :Gstatus<CR>
